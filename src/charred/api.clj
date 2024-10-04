@@ -414,7 +414,9 @@ user> (slurp \"test.csv\")
                        (coerce/->predicate quote?-arg)))
          sep (unchecked-int sep)]
      (fn
-       ([] (WriteCSVData. (io/writer w) (AtomicLong.) (CharBuffer.)))
+       ([] (WriteCSVData. (if (string? w) (io/writer w) w)
+                          (AtomicLong.)
+                          (CharBuffer.)))
        ([^WriteCSVData ws]
         (when close-writer?
           (.close ^Writer (.-w ws)))
