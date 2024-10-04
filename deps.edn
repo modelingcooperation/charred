@@ -49,4 +49,8 @@
   {:replace-deps {slipset/deps-deploy {:mvn/version "0.1.5"}}
    :exec-fn deps-deploy.deps-deploy/deploy
    :exec-args {:installer :local
-               :artifact "target/charred.jar"}}}}
+               :artifact "target/charred.jar"}}}
+ :deps/prep-lib
+ {:ensure "target/classes"
+  :alias :build
+  :fn compile}}
