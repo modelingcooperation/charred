@@ -423,15 +423,15 @@ user> (slurp \"test.csv\")
         (.get ^AtomicLong (.-row-count ws)))
        ([^WriteCSVData ws row]
         (reduce (fn [first? field]
-                  (let [field (str field)
+                  (let [field-string (str field)
                         ^Writer w (.-w ws)
                         ^CharBuffer cb (.-cb ws)]
                     (when-not first? (.write w sep))
                     (if (.test quote-pred field)
                       (do
-                        (CSVWriter/quote field quote cb)
+                        (CSVWriter/quote field-string quote cb)
                         (.write w (.buffer cb) 0 (.length cb)))
-                      (.write w field))
+                      (.write w field-string))
                     false))
                 true
                 row)
